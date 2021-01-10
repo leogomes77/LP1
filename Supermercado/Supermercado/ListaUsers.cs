@@ -27,7 +27,7 @@ namespace Supermercado
             //Validaçao
             if (File.Exists(nomeDoFicheiro))
             {
-                File.Delete(nomeDoFicheiro);
+                
             }
 
             FileStream fileStream = File.Create(nomeDoFicheiro);
