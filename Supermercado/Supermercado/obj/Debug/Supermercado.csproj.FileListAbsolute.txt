@@ -1,0 +1,7 @@
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\bin\Debug\Supermercado.exe.config
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\bin\Debug\Supermercado.exe
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\bin\Debug\Supermercado.pdb
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\obj\Debug\Supermercado.csprojAssemblyReference.cache
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\obj\Debug\Supermercado.csproj.CoreCompileInputs.cache
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\obj\Debug\Supermercado.exe
+C:\Users\Carlos Baixo\Desktop\Supermercado\Supermercado\obj\Debug\Supermercado.pdb
