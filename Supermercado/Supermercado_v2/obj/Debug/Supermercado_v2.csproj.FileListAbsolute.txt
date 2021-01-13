@@ -1,0 +1,21 @@
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\bin\Debug\Supermercado_v2.exe.config
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\bin\Debug\Supermercado_v2.exe
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\bin\Debug\Supermercado_v2.pdb
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.csprojAssemblyReference.cache
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.csproj.CoreCompileInputs.cache
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.exe
+C:\Users\Carlos Baixo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.pdb
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.csprojAssemblyReference.cache
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.csproj.CoreCompileInputs.cache
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.exe
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\obj\Debug\Supermercado_v2.pdb
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\bin\Debug\Supermercado_v2.exe.config
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\bin\Debug\Supermercado_v2.exe
+C:\Users\Leonardo\Desktop\Supermercado_v2\Supermercado_v2\bin\Debug\Supermercado_v2.pdb
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\bin\Debug\Supermercado_v2.exe.config
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\bin\Debug\Supermercado_v2.exe
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\bin\Debug\Supermercado_v2.pdb
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.csprojAssemblyReference.cache
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.csproj.CoreCompileInputs.cache
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.exe
+C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.pdb

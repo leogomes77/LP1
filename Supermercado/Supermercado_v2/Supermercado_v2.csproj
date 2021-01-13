@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{89FD9D21-FCF9-4E88-9B1D-AB7B06EEAF46}</ProjectGuid>
+    <ProjectGuid>{C01ECDF1-3A0F-4655-BDB4-C2A4278C0AB1}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Supermercado</RootNamespace>
-    <AssemblyName>Supermercado</AssemblyName>
+    <RootNamespace>Supermercado_v2</RootNamespace>
+    <AssemblyName>Supermercado_v2</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -43,9 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ListaUsers.cs" />
+    <Compile Include="Produto.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registos.cs" />
+    <Compile Include="Stock.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
