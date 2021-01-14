@@ -99,7 +99,7 @@ namespace Supermercado_v2
                 SaveStock();
                 return 1;
             }
-            return 0;
+            
         }
 
 
@@ -113,47 +113,8 @@ namespace Supermercado_v2
 
         }
 
-        //Remover Produtos
 
-        public int RemoverStock(string descricao, int quantidade)
-        {
-            int encontrou = 0;
-
-            //Procura na lista de produto , o produtos em questão e se a quantidade do produto for maior que 1 ele subtrai 1 quantidade
-            foreach (Produto produto in stock)
-            {
-                if (String.Compare(descricao, produto.descricao) == 0 && produto.quantidade > 0)
-                {
-                    encontrou = 1;
-                    produto.quantidade -= quantidade;
-                    if(produto.quantidade <= 0)
-                    {
-                        produto.quantidade = 0;
-                    }
-                }
-            }
-            if (encontrou == 1)
-            {
-                SaveStock();
-                return 1;
-            }
-            //Remove o produto da lista se a quantidade for 1 
-            if (encontrou == 1)
-            {
-                int produtoApagado = stock.RemoveAll(Produto => Produto.descricao == descricao);
-                SaveStock();
-                return 1;
-            }
-            //Se nao for nenhum destes casos retorna 0
-            else
-            {
-                return 0;
-            }
-        }
-
-
-        //Limpar o Stock Todo
-
+        //Remover Produto da lista
         public int RemoverStock(string descricao)
         {
             bool encontrou = false;
@@ -175,6 +136,66 @@ namespace Supermercado_v2
             return 0;
         }
 
-        //Vender um produto ou muitos
+        public int AtualizarStock(string descricao, string quantidade)
+        {
+
+            string operacao = quantidade.Substring(0, 1);
+            string novaQuantidade = quantidade.Substring(1);
+
+            foreach (Produto produto in stock)
+            {
+                if (String.Compare(descricao, produto.descricao) == 0)
+                {
+                    if(operacao == "+")
+                    {
+                        produto.quantidade += int.Parse(novaQuantidade);
+                        SaveStock();
+                        return produto.quantidade;
+                        
+                    }
+
+                    if(operacao == "-")
+                    {
+                        produto.quantidade -= int.Parse(novaQuantidade);
+                        if (produto.quantidade < 0) produto.quantidade = 0;
+                        SaveStock();
+                        return produto.quantidade;
+                    }
+                }
+            }
+            return 0;
+        }
+
+
+
+        //Vender um ou mais produtos
+        public int venderProduto(string desc, int quantidade)
+        {
+            
+            foreach(Produto produto in stock)
+            {
+                if(String.Compare(produto.descricao, desc) == 0)
+                {
+                    if (produto.quantidade - quantidade < 0) return -1;
+
+                    produto.quantidade -= quantidade;
+                    
+                }
+            }
+
+            return 1;
+        }
+
+        public Produto getProduto(string descricao)
+        {
+            foreach(Produto produto in stock)
+            {
+                if(String.Compare(descricao, produto.descricao) == 0)
+                {
+                    return produto;
+                }
+            }
+            return null;
+        }
     }
 }

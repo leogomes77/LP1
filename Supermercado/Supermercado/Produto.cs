@@ -41,5 +41,12 @@ namespace Supermercado_v2
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             return " | Categoria: " + categoria + " | Descrição: " + descricao + " | Preço: " + preço+ "€" + "  | Quantidade em Stock: " + quantidade;
         }
+
+        public string ToString2()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            return " |Categoria: " + categoria + " | Descrição: " + descricao + " | Preço: " + preço + "€";
+        }
+
     }
 }

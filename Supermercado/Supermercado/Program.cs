@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -13,13 +14,17 @@ namespace Supermercado_v2
         {
             Stock stock = new Stock();
             Registos registos = new Registos();
-
-            registos.RegistarFuncionario("Jorge", "123", "Repositor");
+            ListaFaturas faturas = new ListaFaturas();
+            
+            
+            
+            
+            registos.RegistarFuncionario("Caixa", "123", "Caixa");
 
             //Carregar os ficheiros
             stock.leituraStock();
             registos.leituraRegistos();
-
+            faturas.leituraFaturas();
             //Login
             Console.WriteLine("---------- LOGIN ----------");
             Console.Write("\t Username  : ");
@@ -125,7 +130,7 @@ namespace Supermercado_v2
                 Console.WriteLine("---------- Menu -> {0} ----------", resultadoLogin);
                 Console.WriteLine("\n1 - Listar Produtos");
                 Console.WriteLine("2 - Adicionar Produtos");            
-                Console.WriteLine("3 - Remover Produtos");
+                Console.WriteLine("3 - Atualizar stock");
                 Console.WriteLine("4 - Remover Produtos");
                 Console.WriteLine("5 - Limpar Lista");
                 Console.WriteLine("0 - Logout");
@@ -185,32 +190,6 @@ namespace Supermercado_v2
                         goto startRepositor;
                         break;
 
-                    case "3":
-                        Console.Clear();
-                        Console.WriteLine("Insira o produto a apagar: ");
-                        string produtoApagar = Console.ReadLine();
-                        Console.WriteLine("\nInsira a quantidade a apagar: ");
-                        int quantistock = int.Parse(Console.ReadLine());
-
-                        //removerStock devolve:
-                        // 1 se apagar
-                        // 0 produto não existir
-                        int apagou = stock.RemoverStock(produtoApagar,quantistock);
-                        if (apagou == 1)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Produto apagado com sucesso");
-                            Console.ReadKey();
-                            goto startRepositor;
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Produto não existe");
-                            Console.ReadKey();
-                            goto startRepositor;
-                        }
-                        break;
 
                     case "4":
                         Console.Clear();
@@ -233,14 +212,81 @@ namespace Supermercado_v2
                             goto startRepositor;
                         }
 
-                        break;
+                    case "3":
+                        Console.Clear();
+                        Console.WriteLine("Insira o produto a atualizar: ");
+                        string produtoAtualizar = Console.ReadLine();
+                        Console.WriteLine("Insira a quantidade a atualizar: +/- quantidade");
+                        string quantiAtualizar = Console.ReadLine();
+                        int novaQuantidade = stock.AtualizarStock(produtoAtualizar, quantiAtualizar);
+                        Console.Clear();
+                        if (novaQuantidade > 0)
+                        {
+
+                            Console.WriteLine("Stock atualizado com sucesso!\nO seu produto tem agora {0} unidades", novaQuantidade);
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Impossivel");
+                            Console.ReadKey();
+                        }
+                        goto startRepositor;
                       
                     default:
 
                         break;
                 }
             }
-            
+
+            if (String.Compare("caixa", resultadoLogin, true) == 0)
+            {
+            startCaixa:
+                Console.Clear();
+                Console.WriteLine("Insira o nome do cliente:");
+                string nomeCliente = Console.ReadLine();
+                Console.Clear();
+                string descProduto = "";
+                List<Produto> listaProdutosVendidos = new List<Produto>();
+                float preçoTotal = 0;
+                ArrayList arrayQuantidades = new ArrayList();
+                
+                do
+                {
+                    stock.ListarProdutos();
+                    Console.WriteLine("\n\nInsira a descrição do produto a adicionar");
+                    descProduto = Console.ReadLine();
+                    
+
+                    if (descProduto == "0") break;
+                    else
+                    {
+                        
+                        Console.WriteLine("Insira a quantidade do produto a adicionar:");
+                        int quantidade = int.Parse(Console.ReadLine());
+                        arrayQuantidades.Add(quantidade);
+                        
+                        stock.venderProduto(descProduto, quantidade);
+                        Console.Clear();
+                        listaProdutosVendidos.Add(stock.getProduto(descProduto));
+                        preçoTotal += stock.getProduto(descProduto).preço * quantidade;
+                    }
+                } while (descProduto != "0");
+
+                
+                faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);
+                faturas.SaveFaturas();
+                Console.Clear();
+                Fatura faturaNova = new Fatura();
+                faturaNova = faturas.GetFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos);
+                
+
+                Console.WriteLine(faturaNova.ToString());
+                Console.ReadKey();
+                goto startCaixa;
+            }
+
+
             else
             {
                 Console.Clear();
