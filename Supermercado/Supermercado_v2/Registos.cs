@@ -125,14 +125,17 @@ namespace Supermercado_v2
         {
             //RemoveAll devolve o número de elementos da lista que apagou se encontrar a condição
             int numApagados = registos.RemoveAll(user => user.username == username);
-
+           
             if(numApagados == 1)
             {
                 SaveRegistos();
                 return 1;
             }
 
-            else { return 0; }
+            else 
+            { 
+                return 0; 
+            }
         }
     }
 }

@@ -19,3 +19,10 @@ C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercad
 C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.csproj.CoreCompileInputs.cache
 C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.exe
 C:\Users\Leonardo\Desktop\Supermercado_Lei\Supermercado_v2\obj\Debug\Supermercado_v2.pdb
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\obj\Debug\Supermercado_v2.csprojAssemblyReference.cache
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\obj\Debug\Supermercado_v2.csproj.CoreCompileInputs.cache
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\obj\Debug\Supermercado_v2.exe
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\obj\Debug\Supermercado_v2.pdb
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\bin\Debug\Supermercado_v2.exe.config
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\bin\Debug\Supermercado_v2.exe
+C:\Users\Leonardo\Desktop\LP1 TRABALHO\LP1\Supermercado\Supermercado_v2\bin\Debug\Supermercado_v2.pdb

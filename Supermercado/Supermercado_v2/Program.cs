@@ -33,10 +33,12 @@ namespace Supermercado_v2
 
             if(String.Compare("gerente", resultadoLogin, true)==0)
             {
+                startGerente:
                 Console.Clear();
                 Console.WriteLine("---------- Menu -> {0} ----------", resultadoLogin);
                 Console.WriteLine("\n1 - Adicionar Funcionário");
-                Console.WriteLine("\n2 - Apagar Funcionário");
+                Console.WriteLine("2 - Apagar Funcionário");
+                Console.WriteLine("3 - Vender");
                 Console.WriteLine("0 - Logout");
                 string respostaMenu = Console.ReadLine();
 
@@ -63,12 +65,14 @@ namespace Supermercado_v2
                             Console.Clear();
                             Console.WriteLine("Já existe");
                             Console.ReadKey();
+                            goto startGerente;
                         }
 
                         else
                         {
                             Console.WriteLine("Registo efetuado com sucesso");
                             Console.ReadKey();
+                            goto startGerente;
                         }
                         break;
 
@@ -86,13 +90,19 @@ namespace Supermercado_v2
                             Console.Clear();
                             Console.WriteLine("User apagado com sucesso");
                             Console.ReadKey();
+                            goto startGerente;
                         }
                         else
                         {
                             Console.Clear();
                             Console.WriteLine("User não existe");
                             Console.ReadKey();
+                            goto startGerente;
                         }
+                        break;
+
+                    case "3":
+
                         break;
 
                     case "0":
@@ -110,11 +120,14 @@ namespace Supermercado_v2
 
             if(String.Compare("repositor", resultadoLogin, true) == 0)
             {
+                startRepositor:
                 Console.Clear();
                 Console.WriteLine("---------- Menu -> {0} ----------", resultadoLogin);
-                Console.WriteLine("\n1 - Adicionar produtos");
-                Console.WriteLine("2 - Listar Produtos");
+                Console.WriteLine("\n1 - Listar Produtos");
+                Console.WriteLine("2 - Adicionar Produtos");            
                 Console.WriteLine("3 - Remover Produtos");
+                Console.WriteLine("4 - Remover Produtos");
+                Console.WriteLine("5 - Limpar Lista");
                 Console.WriteLine("0 - Logout");
                 string respostaRepositor = Console.ReadLine();
 
@@ -126,7 +139,7 @@ namespace Supermercado_v2
                         System.Diagnostics.Process.Start(fileName);
                         break;
 
-                    case "1":
+                    case "2":
                         //AdicionarProduto
                         //Devolve 1 se adicionar corretamente
                         //Devolve 0 se não adicionar
@@ -153,46 +166,77 @@ namespace Supermercado_v2
                             Console.Clear();
                             Console.WriteLine("Adicionado com Sucesso!");
                             Console.ReadKey();
+                            goto startRepositor;
                         }
                         else
                         {
                             Console.Clear();
                             Console.WriteLine("Nao Adicionou!");
                             Console.ReadKey();
+                            goto startRepositor;
                         }
 
                         break;
 
-                    case "2":
+                    case "1":
                         Console.Clear();
                         stock.ListarProdutos();
                         Console.ReadKey();
+                        goto startRepositor;
                         break;
 
                     case "3":
                         Console.Clear();
                         Console.WriteLine("Insira o produto a apagar: ");
                         string produtoApagar = Console.ReadLine();
+                        Console.WriteLine("\nInsira a quantidade a apagar: ");
+                        int quantistock = int.Parse(Console.ReadLine());
 
                         //removerStock devolve:
                         // 1 se apagar
-                        // 0 user não existir
-                        int apagou = stock.RemoverStock(produtoApagar);
+                        // 0 produto não existir
+                        int apagou = stock.RemoverStock(produtoApagar,quantistock);
                         if (apagou == 1)
                         {
                             Console.Clear();
                             Console.WriteLine("Produto apagado com sucesso");
                             Console.ReadKey();
+                            goto startRepositor;
                         }
                         else
                         {
                             Console.Clear();
                             Console.WriteLine("Produto não existe");
                             Console.ReadKey();
+                            goto startRepositor;
                         }
                         break;
 
+                    case "4":
+                        Console.Clear();
+                        Console.WriteLine("Insira o produto a apagar: ");
+                        string produtoApag = Console.ReadLine();
+                        int x =stock.RemoverStock(produtoApag);
+
+                        if (x == 1)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Produto apagado com sucesso");
+                            Console.ReadKey();
+                            goto startRepositor;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Produto não existe");
+                            Console.ReadKey();
+                            goto startRepositor;
+                        }
+
+                        break;
+                      
                     default:
+
                         break;
                 }
             }

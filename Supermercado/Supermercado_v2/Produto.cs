@@ -19,15 +19,16 @@ namespace Supermercado_v2
         public Categoria categoria;
         public string descricao;
         public float preço;
-        public int quantidade = 1;
+        public int quantidade;
 
 
 
-        public Produto(Categoria categoria, string descricao, float preço)
+        public Produto(Categoria categoria, string descricao, float preço,int quantidade)
         {
             this.categoria = categoria;
             this.descricao = descricao;
             this.preço = preço;
+            this.quantidade = quantidade;
            
         }
 
@@ -37,10 +38,8 @@ namespace Supermercado_v2
 
         public override string ToString()
         {
-            return " | Categoria: " + categoria + " | Descrição: " + descricao + " | Preço: " + preço + " | Quantidade em Stock: " + quantidade;
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            return " | Categoria: " + categoria + " | Descrição: " + descricao + " | Preço: " + preço+ "€" + "  | Quantidade em Stock: " + quantidade;
         }
-
-
-
     }
 }

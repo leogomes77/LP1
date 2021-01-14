@@ -75,7 +75,7 @@ namespace Supermercado_v2
         //Adicinar e Guardar um Produto 
         public int AdicionarProduto(Produto.Categoria categoria, string descrição, float preço, int quantidade)
         {
-            Produto novoProduto = new Produto(categoria, descrição, preço);
+            Produto novoProduto = new Produto(categoria, descrição, preço, quantidade);
 
             bool existe = false;
             //Ver se já existe
@@ -86,24 +86,20 @@ namespace Supermercado_v2
                     existe = true;
                     produto.quantidade += quantidade;
                 }
-
-
             }
             if (existe == true)
             {
                 Console.WriteLine("Produto Adicionado com Sucesso");
                 SaveStock();
-
                 return 1;
             }
             else
             {
                 stock.Add(novoProduto);
                 SaveStock();
-             
-                return 0;
+                return 1;
             }
-
+            return 0;
         }
 
 
@@ -119,31 +115,66 @@ namespace Supermercado_v2
 
         //Remover Produtos
 
-        public int RemoverStock(string descricao)
+        public int RemoverStock(string descricao, int quantidade)
         {
-            //RemoveAll devolve o número de elementos da lista que apagou se encontrar a condição
-            bool encontrou = false;
+            int encontrou = 0;
+
+            //Procura na lista de produto , o produtos em questão e se a quantidade do produto for maior que 1 ele subtrai 1 quantidade
             foreach (Produto produto in stock)
             {
-                if (String.Compare(descricao, produto.descricao) == 0 && produto.quantidade > 1)
+                if (String.Compare(descricao, produto.descricao) == 0 && produto.quantidade > 0)
                 {
-                    encontrou = true;
-                    produto.quantidade -= 1;
+                    encontrou = 1;
+                    produto.quantidade -= quantidade;
+                    if(produto.quantidade <= 0)
+                    {
+                        produto.quantidade = 0;
+                    }
                 }
             }
-            if (encontrou == true)
+            if (encontrou == 1)
             {
                 SaveStock();
                 return 1;
             }
+            //Remove o produto da lista se a quantidade for 1 
+            if (encontrou == 1)
+            {
+                int produtoApagado = stock.RemoveAll(Produto => Produto.descricao == descricao);
+                SaveStock();
+                return 1;
+            }
+            //Se nao for nenhum destes casos retorna 0
             else
             {
-                int numApagados = stock.RemoveAll(Produto => Produto.descricao == descricao);
-                SaveStock();
                 return 0;
             }
-
         }
 
-    }   
+
+        //Limpar o Stock Todo
+
+        public int RemoverStock(string descricao)
+        {
+            bool encontrou = false;
+            foreach (Produto produto in stock)
+            {
+                if (String.Compare(descricao, produto.descricao) == 0)
+                {
+                    encontrou = true;
+                                      
+                }
+            }
+
+            if (encontrou == true)
+            {
+                int produtoApagado = stock.RemoveAll(Produto => Produto.descricao == descricao);
+                SaveStock();
+                return 1;
+            }
+            return 0;
+        }
+
+        //Vender um produto ou muitos
+    }
 }
