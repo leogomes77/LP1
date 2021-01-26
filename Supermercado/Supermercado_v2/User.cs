@@ -8,7 +8,7 @@ namespace Supermercado_v2
 {
     [Serializable]
     class User
-    { 
+        {
         public string username;
         public string password;
         public string cargo;

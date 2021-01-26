@@ -17,10 +17,6 @@ namespace Supermercado_v2
             ListaFaturas faturas = new ListaFaturas();
 
 
-
-
-            //registos.RegistarFuncionario("gerente", "123", "gerente");
-
             //Carregar os ficheiros
             stock.leituraStock();
             registos.leituraRegistos();
@@ -88,7 +84,7 @@ namespace Supermercado_v2
                             Console.ReadKey();
                             goto startGerente;
                         }
-                        break;
+
 
                     case "2":
                         Console.Clear();
@@ -113,14 +109,14 @@ namespace Supermercado_v2
                             Console.ReadKey();
                             goto startGerente;
                         }
-                        break;
+
 
                     case "3":
                         Console.Clear();
                         registos.ListarFuncionarios();
                         Console.ReadKey();
                         goto startGerente;
-                        break;
+
 
                     case "4":
                         Console.Clear();
@@ -147,13 +143,16 @@ namespace Supermercado_v2
                                 int quantidade = int.Parse(Console.ReadLine());
                                 arrayQuantidades.Add(quantidade);
 
-                                stock.venderProduto(descProduto, quantidade);
-                                Console.Clear();
-                                listaProdutosVendidos.Add(stock.getProduto(descProduto));
-                                preçoTotal += stock.getProduto(descProduto).preço * quantidade;
+                                if (stock.venderProduto(descProduto, quantidade) == 1)
+                                {
+                                    stock.venderProduto(descProduto, quantidade);
+                                    Console.Clear();
+                                    listaProdutosVendidos.Add(stock.getProduto(descProduto));
+                                    preçoTotal += stock.getProduto(descProduto).preço * quantidade;
+                                }
+
                             }
                         } while (descProduto != "0");
-
 
                         faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);
                         faturas.SaveFaturas();
@@ -162,19 +161,18 @@ namespace Supermercado_v2
                         faturaNova = faturas.GetFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos);
 
 
+
                         Console.WriteLine(faturaNova.ToString());
                         Console.ReadKey();
                         goto startGerente;
-
-                        break;
 
                     case "5":
                         Console.Clear();
                         faturas.ListarFaturas();
                         Console.ReadKey();
                         goto startGerente;
-                        break;
-                        break;
+
+
                     case "0":
                         //Dá restart na aplicação
                         //"Logout"                       
@@ -250,16 +248,14 @@ namespace Supermercado_v2
                             Console.ReadKey();
                             goto startRepositor;
                         }
-
-                        break;
+                  
 
                     case "1":
                         Console.Clear();
                         stock.ListarProdutos();
                         Console.ReadKey();
                         goto startRepositor;
-                        break;
-
+                      
 
                     case "4":
                         Console.Clear();
@@ -330,6 +326,7 @@ namespace Supermercado_v2
                         System.Diagnostics.Process.Start(fileName);
                         Environment.Exit(0);
                         break;
+
                     case "1":
                         Console.Clear();
                         Console.WriteLine("Insira o nome do cliente:");
@@ -339,7 +336,6 @@ namespace Supermercado_v2
                         List<Produto> listaProdutosVendidos = new List<Produto>();
                         float preçoTotal = 0;
                         ArrayList arrayQuantidades = new ArrayList();
-                        string x = "";
 
                         do
                         {
@@ -353,26 +349,26 @@ namespace Supermercado_v2
                             {
 
                                 Console.WriteLine("Insira a quantidade do produto a adicionar:");
-                                int quantidade = int.Parse(Console.ReadLine());                          
+                                int quantidade = int.Parse(Console.ReadLine());
                                 arrayQuantidades.Add(quantidade);
 
-                                if (stock.venderProduto(descProduto, quantidade) == 1 )
+                                if (stock.venderProduto(descProduto, quantidade) == 1)
                                 {
                                     stock.venderProduto(descProduto, quantidade);
                                     Console.Clear();
                                     listaProdutosVendidos.Add(stock.getProduto(descProduto));
                                     preçoTotal += stock.getProduto(descProduto).preço * quantidade;
                                 }
-                                                                                     
+
                             }
                         } while (descProduto != "0");
-                    
-                        faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);             
+
+                        faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);
                         faturas.SaveFaturas();
                         Console.Clear();
                         Fatura faturaNova = new Fatura();
                         faturaNova = faturas.GetFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos);
-                        
+
 
 
                         Console.WriteLine(faturaNova.ToString());
@@ -383,7 +379,7 @@ namespace Supermercado_v2
 
                         break;
 
-                }           
+                }
             }
         }
     }

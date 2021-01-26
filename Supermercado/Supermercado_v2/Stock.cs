@@ -99,7 +99,7 @@ namespace Supermercado_v2
                 SaveStock();
                 return 1;
             }
-            
+
         }
 
 
@@ -123,7 +123,7 @@ namespace Supermercado_v2
                 if (String.Compare(descricao, produto.descricao) == 0)
                 {
                     encontrou = true;
-                                      
+
                 }
             }
 
@@ -146,15 +146,14 @@ namespace Supermercado_v2
             {
                 if (String.Compare(descricao, produto.descricao) == 0)
                 {
-                    if(operacao == "+")
+                    if (operacao == "+")
                     {
                         produto.quantidade += int.Parse(novaQuantidade);
                         SaveStock();
                         return produto.quantidade;
-                        
                     }
 
-                    if(operacao == "-")
+                    if (operacao == "-")
                     {
                         produto.quantidade -= int.Parse(novaQuantidade);
                         if (produto.quantidade < 0) produto.quantidade = 0;
@@ -166,13 +165,13 @@ namespace Supermercado_v2
             return 0;
         }
 
-        //Vender um ou mais produtos
+        //Vender um ou mais produtos , se a quantidade do produto - quantidade colocada for < 0 ele returna -1 ,se nao subtrai  e guarda o stock
         public int venderProduto(string desc, int quantidade)
         {
-            
-            foreach(Produto produto in stock)
+
+            foreach (Produto produto in stock)
             {
-                if(String.Compare(produto.descricao, desc) == 0)
+                if (String.Compare(produto.descricao, desc) == 0)
                 {
                     if (produto.quantidade - quantidade < 0)
                     {
@@ -194,13 +193,12 @@ namespace Supermercado_v2
         }
 
 
-
         //Procura o produto que escreveu , e se existir retorna esse produto , senão retorna null e o programa vais breakar
         public Produto getProduto(string descricao)
         {
-            foreach(Produto produto in stock)
+            foreach (Produto produto in stock)
             {
-                if(String.Compare(descricao, produto.descricao) == 0)
+                if (String.Compare(descricao, produto.descricao) == 0)
                 {
                     return produto;
                 }

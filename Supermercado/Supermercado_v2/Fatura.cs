@@ -70,6 +70,7 @@ namespace Supermercado_v2
                + "\n|Nome Cliente: " + nomeCliente
                + "\n|Preço Total: " + preçoTotal + "€\n";
             faturaString += "\n#######################################################\n";
+
             return faturaString;
         }
     }

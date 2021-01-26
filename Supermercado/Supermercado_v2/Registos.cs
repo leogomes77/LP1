@@ -93,7 +93,7 @@ namespace Supermercado_v2
             else
             {
                 Console.Clear();
-                
+
                 return "User não existe";
             }
         }
@@ -104,8 +104,8 @@ namespace Supermercado_v2
         {
             User novoUser = new User(username, password, cargo);
 
-            
-            if(registos.Exists(user => user.username == novoUser.username) == true)
+
+            if (registos.Exists(user => user.username == novoUser.username) == true)
             {
                 return 0;
             }
@@ -135,16 +135,16 @@ namespace Supermercado_v2
         {
             //RemoveAll devolve o número de elementos da lista que apagou se encontrar a condição
             int numApagados = registos.RemoveAll(user => user.username == username);
-           
-            if(numApagados == 1)
+
+            if (numApagados == 1)
             {
                 SaveRegistos();
                 return 1;
             }
 
-            else 
-            { 
-                return 0; 
+            else
+            {
+                return 0;
             }
         }
     }
