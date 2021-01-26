@@ -130,7 +130,7 @@ namespace Supermercado_v2
 
                         do
                         {
-                            stock.ListarProdutos();
+                            stock.ListarProdutosStock();
                             Console.WriteLine("\n\nInsira a descrição do produto a adicionar");
                             descProduto = Console.ReadLine();
 
@@ -197,7 +197,7 @@ namespace Supermercado_v2
                 Console.WriteLine("2 - Adicionar Produtos");
                 Console.WriteLine("3 - Atualizar stock");
                 Console.WriteLine("4 - Remover Produtos");
-                Console.WriteLine("5 - Limpar Lista");
+                Console.WriteLine("5 - Limpar Stock");
                 Console.WriteLine("0 - Logout");
                 Console.WriteLine("\n############################\n");
                 string respostaRepositor = Console.ReadLine();
@@ -232,7 +232,6 @@ namespace Supermercado_v2
                         float preço = float.Parse(Console.ReadLine());
                         Console.WriteLine("Quantidade a adicionar:");
                         int quantidade = int.Parse(Console.ReadLine());
-
                         int resultadoAdicionar = stock.AdicionarProduto(categoriaa, descricaoProduto, preço, quantidade);
                         if (resultadoAdicionar == 1)
                         {
@@ -302,6 +301,13 @@ namespace Supermercado_v2
                         }
                         goto startRepositor;
 
+                    case "5":
+
+                        Console.Clear();
+                        stock.LimparStock();
+                        Console.ReadKey();
+                        goto startRepositor;                      
+
                     default:
 
                         break;
@@ -339,7 +345,7 @@ namespace Supermercado_v2
 
                         do
                         {
-                            stock.ListarProdutos();
+                            stock.ListarProdutosStock();
                             Console.WriteLine("\n\nInsira a descrição do produto a adicionar");
                             descProduto = Console.ReadLine();
 

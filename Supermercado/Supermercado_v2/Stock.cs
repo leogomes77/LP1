@@ -89,7 +89,6 @@ namespace Supermercado_v2
             }
             if (existe == true)
             {
-                Console.WriteLine("Produto Adicionado com Sucesso");
                 SaveStock();
                 return 1;
             }
@@ -100,6 +99,26 @@ namespace Supermercado_v2
                 return 1;
             }
 
+        }
+
+        //Lista de Produtos em stock
+        public void ListarProdutosStock()
+        {
+            foreach (Produto produto in stock)
+            {
+                if (produto.quantidade > 0)
+                {
+                    Console.WriteLine(produto.ToString());
+                }
+            }
+        }
+
+        //Limpar Stock
+        public void LimparStock()
+        {
+            string nomeDoFicheiro = "Stock.txt";
+            File.WriteAllText(nomeDoFicheiro, string.Empty);
+      
         }
 
 
