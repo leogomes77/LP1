@@ -44,20 +44,33 @@ namespace Supermercado_v2
 
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             int i = 0;
-            string faturaString =  "--------------------------------------- FATURA -----------------------------\n"
+            string faturaString =  "#######################################################\n"
+                +"\t            Fatura  \n " 
                 + " |Nome Funcionario:" + nomeFuncionario
                 + "\n |Nome Cliente: " + nomeCliente
                 + "\n |Preço Total: " + preçoTotal +"€\n";
 
             foreach(Produto produto in listaProdutos)
             {
-                faturaString += produto.ToString2() + "\n" + " |Quantidade: " + quantidades[i] + " |\n";
+                faturaString += produto.ToString2() + " " + " | Quantidade: " + quantidades[i] + " |\n";
                 i++;
             }
 
-            faturaString += "_________________________________________";
+            faturaString += "\n#######################################################\n";
             return faturaString;
                 
+        }
+
+        public string ToString2()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            string faturaString = "#######################################################\n"
+               + "\t            Fatura   \n " 
+               + "\n|Nome Funcionario:" + nomeFuncionario
+               + "\n|Nome Cliente: " + nomeCliente
+               + "\n|Preço Total: " + preçoTotal + "€\n";
+            faturaString += "\n#######################################################\n";
+            return faturaString;
         }
     }
 }

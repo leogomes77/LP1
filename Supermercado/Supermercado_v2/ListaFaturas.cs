@@ -23,6 +23,8 @@ namespace Supermercado_v2
             this.listaFaturas = listaFaturas;
         }
 
+
+        //Guardar Faturas
         public void SaveFaturas()
         {
             string localizacaoDoFicheiro = Directory.GetCurrentDirectory();
@@ -47,6 +49,7 @@ namespace Supermercado_v2
         }
 
 
+        //Leitura das Faturas
         public void leituraFaturas()
         {
             string nomeDoFicheiro = "Faturas.txt";
@@ -71,6 +74,7 @@ namespace Supermercado_v2
             }
         }
 
+        //Criar um Fatura para apenas um produto/uma quantidade
         public int RegistarFatura(string funcionario, string cliente, float preçoTotal, Produto produto, int quantidade)
         {
             Fatura novaFatura = new Fatura(funcionario, cliente, preçoTotal, produto, quantidade);
@@ -81,10 +85,11 @@ namespace Supermercado_v2
             
 
         }
+
+        //Criar um Fatura para mais do que um produto/uma quantidade
         public int RegistarFatura(string funcionario, string cliente, float preçoTotal, List<Produto> listaProdutos, ArrayList quantidades)
         {
             Fatura novaFatura = new Fatura(funcionario, cliente, preçoTotal, listaProdutos, quantidades);
-
             listaFaturas.Add(novaFatura);
             SaveFaturas();
             return 0;
@@ -92,6 +97,8 @@ namespace Supermercado_v2
 
         }
 
+
+        
         public Fatura GetFatura(string funcionario, string cliente, float preço, List<Produto> listaProdutos)
         {
             foreach(Fatura fatura in listaFaturas)
@@ -102,6 +109,15 @@ namespace Supermercado_v2
                 }
             }
             return null;
+        }
+
+        //Listagem Das Faturas
+        public void ListarFaturas()
+        {
+            foreach (Fatura fatura in listaFaturas)
+            {
+                Console.WriteLine(fatura.ToString2());
+            }
         }
     }
 }

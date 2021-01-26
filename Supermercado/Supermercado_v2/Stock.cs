@@ -136,7 +136,24 @@ namespace Supermercado_v2
             return 0;
         }
 
-        public int AtualizarStock(string descricao, string quantidade)
+        //Atualizar quantidade de stock consoante a quantidade dos produtos que escolheu ao vender
+        public int AtualizarStockFatura(string descricao, string quantidade)
+        {
+   
+            foreach (Produto produto in stock)
+            {
+                if (String.Compare(descricao, produto.descricao) == 0)
+                {             
+                        produto.quantidade -= int.Parse(quantidade);
+                        if (produto.quantidade <= 0) produto.quantidade = 0;
+                        SaveStock();
+                        return produto.quantidade;
+                }
+            }
+            return 0;
+        }
+
+        public int AtualizarStock(string descricao, string quantidade) // Atualizar o stock de produtos , + para adicionar , - para remover 
         {
 
             string operacao = quantidade.Substring(0, 1);
@@ -166,8 +183,6 @@ namespace Supermercado_v2
             return 0;
         }
 
-
-
         //Vender um ou mais produtos
         public int venderProduto(string desc, int quantidade)
         {
@@ -176,16 +191,26 @@ namespace Supermercado_v2
             {
                 if(String.Compare(produto.descricao, desc) == 0)
                 {
-                    if (produto.quantidade - quantidade < 0) return -1;
+                    if (produto.quantidade - quantidade < 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Impossivel");
+                        Console.ReadKey();
+                    }
 
-                    produto.quantidade -= quantidade;
-                    
+                    else
+                    {
+                        produto.quantidade -= quantidade;
+                    }
                 }
             }
 
             return 1;
         }
 
+
+
+        //Procura o produto que escreveu , e se existir retorna esse produto , senão retorna null e o programa vais breakar
         public Produto getProduto(string descricao)
         {
             foreach(Produto produto in stock)

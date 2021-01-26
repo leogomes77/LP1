@@ -120,6 +120,16 @@ namespace Supermercado_v2
         }
 
 
+        //Listagem dos Funcionarios e o respetivo login
+        public void ListarFuncionarios()
+        {
+            foreach (User user in registos)
+            {
+                Console.WriteLine(user.ToString());
+            }
+        }
+
+
         //Remover um Funcionario
         public int apagarFuncionario(string username)
         {

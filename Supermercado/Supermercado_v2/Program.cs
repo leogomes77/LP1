@@ -15,36 +15,44 @@ namespace Supermercado_v2
             Stock stock = new Stock();
             Registos registos = new Registos();
             ListaFaturas faturas = new ListaFaturas();
-            
-            
-            
-            
-            registos.RegistarFuncionario("Caixa", "123", "Caixa");
+
+
+
+
+            //registos.RegistarFuncionario("gerente", "123", "gerente");
 
             //Carregar os ficheiros
             stock.leituraStock();
             registos.leituraRegistos();
             faturas.leituraFaturas();
             //Login
-            Console.WriteLine("---------- LOGIN ----------");
-            Console.Write("\t Username  : ");
+            Console.WriteLine("############################\n");
+            Console.WriteLine("\t   LOGIN\n");
+            Console.Write("Username  : ");
             string username = Console.ReadLine();
-            Console.Write("\t Password  : ");
+            Console.Write("Password  : ");
             string pw = Console.ReadLine();
             Console.WriteLine("\n");
+            Console.WriteLine("############################\n");
+            Console.ReadKey();
 
-            //resultadoLogin = Cargo do user logado
+
             string resultadoLogin = registos.Login(username, pw);
 
-            if(String.Compare("gerente", resultadoLogin, true)==0)
+            if (String.Compare("gerente", resultadoLogin, true) == 0)
             {
-                startGerente:
+            startGerente:
                 Console.Clear();
-                Console.WriteLine("---------- Menu -> {0} ----------", resultadoLogin);
-                Console.WriteLine("\n1 - Adicionar Funcionário");
+                Console.WriteLine("############################\n");
+                Console.WriteLine("\t   Menu\n");
+                Console.WriteLine("1 - Adicionar Funcionário");
                 Console.WriteLine("2 - Apagar Funcionário");
-                Console.WriteLine("3 - Vender");
+                Console.WriteLine("3 - Lista de Funcionário");
+                Console.WriteLine("4 - Vender");
+                Console.WriteLine("5 - Faturas");
                 Console.WriteLine("0 - Logout");
+                Console.WriteLine("\n############################\n");
+
                 string respostaMenu = Console.ReadLine();
 
                 switch (respostaMenu)
@@ -76,6 +84,7 @@ namespace Supermercado_v2
                         else
                         {
                             Console.WriteLine("Registo efetuado com sucesso");
+                            registos.SaveRegistos();
                             Console.ReadKey();
                             goto startGerente;
                         }
@@ -90,7 +99,7 @@ namespace Supermercado_v2
                         // 1 se apagar
                         // 0 user não existir
                         int apagou = registos.apagarFuncionario(userApagar);
-                        if(apagou == 1)
+                        if (apagou == 1)
                         {
                             Console.Clear();
                             Console.WriteLine("User apagado com sucesso");
@@ -107,41 +116,102 @@ namespace Supermercado_v2
                         break;
 
                     case "3":
+                        Console.Clear();
+                        registos.ListarFuncionarios();
+                        Console.ReadKey();
+                        goto startGerente;
+                        break;
+
+                    case "4":
+                        Console.Clear();
+                        Console.WriteLine("Insira o nome do cliente:");
+                        string nomeCliente = Console.ReadLine();
+                        Console.Clear();
+                        string descProduto = "";
+                        List<Produto> listaProdutosVendidos = new List<Produto>();
+                        float preçoTotal = 0;
+                        ArrayList arrayQuantidades = new ArrayList();
+
+                        do
+                        {
+                            stock.ListarProdutos();
+                            Console.WriteLine("\n\nInsira a descrição do produto a adicionar");
+                            descProduto = Console.ReadLine();
+
+
+                            if (descProduto == "0") break;
+                            else
+                            {
+
+                                Console.WriteLine("Insira a quantidade do produto a adicionar:");
+                                int quantidade = int.Parse(Console.ReadLine());
+                                arrayQuantidades.Add(quantidade);
+
+                                stock.venderProduto(descProduto, quantidade);
+                                Console.Clear();
+                                listaProdutosVendidos.Add(stock.getProduto(descProduto));
+                                preçoTotal += stock.getProduto(descProduto).preço * quantidade;
+                            }
+                        } while (descProduto != "0");
+
+
+                        faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);
+                        faturas.SaveFaturas();
+                        Console.Clear();
+                        Fatura faturaNova = new Fatura();
+                        faturaNova = faturas.GetFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos);
+
+
+                        Console.WriteLine(faturaNova.ToString());
+                        Console.ReadKey();
+                        goto startGerente;
 
                         break;
 
+                    case "5":
+                        Console.Clear();
+                        faturas.ListarFaturas();
+                        Console.ReadKey();
+                        goto startGerente;
+                        break;
+                        break;
                     case "0":
                         //Dá restart na aplicação
-                        //"Logout"
+                        //"Logout"                       
                         var fileName = Assembly.GetExecutingAssembly().Location;
                         System.Diagnostics.Process.Start(fileName);
+                        Environment.Exit(0);
                         break;
 
                     default:
                         break;
                 }
-                
+
             }
 
-            if(String.Compare("repositor", resultadoLogin, true) == 0)
+            if (String.Compare("repositor", resultadoLogin, true) == 0)
             {
-                startRepositor:
+            startRepositor:
                 Console.Clear();
-                Console.WriteLine("---------- Menu -> {0} ----------", resultadoLogin);
+                Console.WriteLine("############################\n");
+                Console.WriteLine("\t   Menu\n");
                 Console.WriteLine("\n1 - Listar Produtos");
-                Console.WriteLine("2 - Adicionar Produtos");            
+                Console.WriteLine("2 - Adicionar Produtos");
                 Console.WriteLine("3 - Atualizar stock");
                 Console.WriteLine("4 - Remover Produtos");
                 Console.WriteLine("5 - Limpar Lista");
                 Console.WriteLine("0 - Logout");
+                Console.WriteLine("\n############################\n");
                 string respostaRepositor = Console.ReadLine();
 
-                switch(respostaRepositor){
+                switch (respostaRepositor)
+                {
                     case "0":
                         //Dá restart na aplicação
                         //"Logout"
                         var fileName = Assembly.GetExecutingAssembly().Location;
                         System.Diagnostics.Process.Start(fileName);
+                        Environment.Exit(0);
                         break;
 
                     case "2":
@@ -155,8 +225,8 @@ namespace Supermercado_v2
                         Console.WriteLine("2 - Prateleira");
                         Console.WriteLine("3 - Enlatados");
                         int escolha = int.Parse(Console.ReadLine());
-                        Produto.Categoria categoriaa = (Produto.Categoria)escolha;   
-                        
+                        Produto.Categoria categoriaa = (Produto.Categoria)escolha;
+
                         Console.Clear();
                         Console.WriteLine("Descrição: ");
                         string descricaoProduto = Console.ReadLine();
@@ -166,7 +236,7 @@ namespace Supermercado_v2
                         int quantidade = int.Parse(Console.ReadLine());
 
                         int resultadoAdicionar = stock.AdicionarProduto(categoriaa, descricaoProduto, preço, quantidade);
-                        if(resultadoAdicionar == 1)
+                        if (resultadoAdicionar == 1)
                         {
                             Console.Clear();
                             Console.WriteLine("Adicionado com Sucesso!");
@@ -195,7 +265,7 @@ namespace Supermercado_v2
                         Console.Clear();
                         Console.WriteLine("Insira o produto a apagar: ");
                         string produtoApag = Console.ReadLine();
-                        int x =stock.RemoverStock(produtoApag);
+                        int x = stock.RemoverStock(produtoApag);
 
                         if (x == 1)
                         {
@@ -228,11 +298,14 @@ namespace Supermercado_v2
                         }
                         else
                         {
-                            Console.WriteLine("Impossivel");
+                            Console.WriteLine("Stock atualizado com sucesso!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            Console.WriteLine("Produto: {0} encontra-se sem stock", produtoAtualizar);
                             Console.ReadKey();
                         }
                         goto startRepositor;
-                      
+
                     default:
 
                         break;
@@ -243,57 +316,72 @@ namespace Supermercado_v2
             {
             startCaixa:
                 Console.Clear();
-                Console.WriteLine("Insira o nome do cliente:");
-                string nomeCliente = Console.ReadLine();
-                Console.Clear();
-                string descProduto = "";
-                List<Produto> listaProdutosVendidos = new List<Produto>();
-                float preçoTotal = 0;
-                ArrayList arrayQuantidades = new ArrayList();
-                
-                do
+                Console.WriteLine("############################\n");
+                Console.WriteLine("\t   Menu\n");
+                Console.WriteLine("1 - Vender");
+                Console.WriteLine("\n0 - Logout");
+                Console.WriteLine("\n############################\n");
+                string respostaCaixa = Console.ReadLine();
+
+                switch (respostaCaixa)
                 {
-                    stock.ListarProdutos();
-                    Console.WriteLine("\n\nInsira a descrição do produto a adicionar");
-                    descProduto = Console.ReadLine();
-                    
-
-                    if (descProduto == "0") break;
-                    else
-                    {
-                        
-                        Console.WriteLine("Insira a quantidade do produto a adicionar:");
-                        int quantidade = int.Parse(Console.ReadLine());
-                        arrayQuantidades.Add(quantidade);
-                        
-                        stock.venderProduto(descProduto, quantidade);
+                    case "0":
+                        var fileName = Assembly.GetExecutingAssembly().Location;
+                        System.Diagnostics.Process.Start(fileName);
+                        Environment.Exit(0);
+                        break;
+                    case "1":
                         Console.Clear();
-                        listaProdutosVendidos.Add(stock.getProduto(descProduto));
-                        preçoTotal += stock.getProduto(descProduto).preço * quantidade;
-                    }
-                } while (descProduto != "0");
+                        Console.WriteLine("Insira o nome do cliente:");
+                        string nomeCliente = Console.ReadLine();
+                        Console.Clear();
+                        string descProduto = "";
+                        List<Produto> listaProdutosVendidos = new List<Produto>();
+                        float preçoTotal = 0;
+                        ArrayList arrayQuantidades = new ArrayList();
+                        string x = "";
 
-                
-                faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);
-                faturas.SaveFaturas();
-                Console.Clear();
-                Fatura faturaNova = new Fatura();
-                faturaNova = faturas.GetFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos);
-                
+                        do
+                        {
+                            stock.ListarProdutos();
+                            Console.WriteLine("\n\nInsira a descrição do produto a adicionar");
+                            descProduto = Console.ReadLine();
 
-                Console.WriteLine(faturaNova.ToString());
-                Console.ReadKey();
-                goto startCaixa;
+
+                            if (descProduto == "0") break;
+                            else
+                            {
+
+                                Console.WriteLine("Insira a quantidade do produto a adicionar:");
+                                int quantidade = int.Parse(Console.ReadLine());
+                                x = quantidade.ToString();
+                                stock.AtualizarStockFatura(descProduto, x);        //Remove a quantidade 2x
+                                arrayQuantidades.Add(quantidade);
+                                stock.venderProduto(descProduto, quantidade);
+                                Console.Clear();
+                                listaProdutosVendidos.Add(stock.getProduto(descProduto));
+                                preçoTotal += stock.getProduto(descProduto).preço * quantidade;                                                             
+                            }
+                        } while (descProduto != "0");
+                    
+                        faturas.RegistarFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos, arrayQuantidades);             
+                        faturas.SaveFaturas();
+                        Console.Clear();
+                        Fatura faturaNova = new Fatura();
+                        faturaNova = faturas.GetFatura(username, nomeCliente, preçoTotal, listaProdutosVendidos);
+                        
+
+
+                        Console.WriteLine(faturaNova.ToString());
+                        Console.ReadKey();
+                        goto startCaixa;
+
+                    default:
+
+                        break;
+
+                }           
             }
-
-
-            else
-            {
-                Console.Clear();
-                Console.WriteLine(resultadoLogin);
-                Console.ReadKey();
-            }
-            
         }
     }
 }

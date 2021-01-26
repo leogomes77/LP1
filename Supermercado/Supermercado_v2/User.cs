@@ -22,7 +22,7 @@ namespace Supermercado_v2
 
         public override string ToString()
         {
-            return " | Username: " + username + " | Password:" + password + " | Cargo:" + cargo;
+            return " | Username: " + username + " | Password: " + password + " | Cargo: " + cargo;
         }
     }
 }
