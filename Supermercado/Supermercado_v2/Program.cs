@@ -353,14 +353,17 @@ namespace Supermercado_v2
                             {
 
                                 Console.WriteLine("Insira a quantidade do produto a adicionar:");
-                                int quantidade = int.Parse(Console.ReadLine());
-                                x = quantidade.ToString();
-                                stock.AtualizarStockFatura(descProduto, x);        //Remove a quantidade 2x
+                                int quantidade = int.Parse(Console.ReadLine());                          
                                 arrayQuantidades.Add(quantidade);
-                                stock.venderProduto(descProduto, quantidade);
-                                Console.Clear();
-                                listaProdutosVendidos.Add(stock.getProduto(descProduto));
-                                preçoTotal += stock.getProduto(descProduto).preço * quantidade;                                                             
+
+                                if (stock.venderProduto(descProduto, quantidade) == 1 )
+                                {
+                                    stock.venderProduto(descProduto, quantidade);
+                                    Console.Clear();
+                                    listaProdutosVendidos.Add(stock.getProduto(descProduto));
+                                    preçoTotal += stock.getProduto(descProduto).preço * quantidade;
+                                }
+                                                                                     
                             }
                         } while (descProduto != "0");
                     

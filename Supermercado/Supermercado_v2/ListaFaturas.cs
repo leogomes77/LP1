@@ -116,7 +116,7 @@ namespace Supermercado_v2
         {
             foreach (Fatura fatura in listaFaturas)
             {
-                Console.WriteLine(fatura.ToString2());
+                Console.WriteLine(fatura.ToString());
             }
         }
     }

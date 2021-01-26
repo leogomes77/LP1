@@ -136,23 +136,6 @@ namespace Supermercado_v2
             return 0;
         }
 
-        //Atualizar quantidade de stock consoante a quantidade dos produtos que escolheu ao vender
-        public int AtualizarStockFatura(string descricao, string quantidade)
-        {
-   
-            foreach (Produto produto in stock)
-            {
-                if (String.Compare(descricao, produto.descricao) == 0)
-                {             
-                        produto.quantidade -= int.Parse(quantidade);
-                        if (produto.quantidade <= 0) produto.quantidade = 0;
-                        SaveStock();
-                        return produto.quantidade;
-                }
-            }
-            return 0;
-        }
-
         public int AtualizarStock(string descricao, string quantidade) // Atualizar o stock de produtos , + para adicionar , - para remover 
         {
 
@@ -196,11 +179,13 @@ namespace Supermercado_v2
                         Console.Clear();
                         Console.WriteLine("Impossivel");
                         Console.ReadKey();
+                        return -1;
                     }
 
                     else
                     {
                         produto.quantidade -= quantidade;
+                        SaveStock();
                     }
                 }
             }

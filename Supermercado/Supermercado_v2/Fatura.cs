@@ -15,7 +15,7 @@ namespace Supermercado_v2
         public float preçoTotal;
         public Produto produto;
         public List<Produto> listaProdutos;
-        ArrayList quantidades;
+        public ArrayList quantidades;
         public int quantidade;
         public Fatura()
         {
@@ -65,7 +65,7 @@ namespace Supermercado_v2
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             string faturaString = "#######################################################\n"
-               + "\t            Fatura   \n " 
+               + "\t               Fatura   \n" 
                + "\n|Nome Funcionario:" + nomeFuncionario
                + "\n|Nome Cliente: " + nomeCliente
                + "\n|Preço Total: " + preçoTotal + "€\n";
